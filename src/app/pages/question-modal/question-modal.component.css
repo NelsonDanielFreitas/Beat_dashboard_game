@@ -1,0 +1,10 @@
+/* Define o tamanho do modal */
+.custom-modal {
+  width: 100%; /* 80% da largura da janela de visualização */
+  max-width: 800px; /* Largura máxima */
+  height: 70vh; /* 70% da altura da janela de visualização */
+  max-height: 600px; /* Altura máxima */
+  padding: 16px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
+}

@@ -1,0 +1,142 @@
+<form [formGroup]="questionForm">
+  <mat-form-field appearance="outline">
+    <mat-label>Texto da Pergunta</mat-label>
+    <input
+      label="Texto da Pergunta"
+      matInput
+      formControlName="TextoPergunta"
+      placeholder="Texto da Pergunta"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      formControlName="TempoLimite"
+      placeholder="Tempo Limite (segundos)"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="number"
+      formControlName="NivelDificuldade"
+      placeholder="Nivel de dificuldade"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="Categoria" placeholder="Categoria">
+      <mat-option
+        *ngFor="let category of categories"
+        [value]="category.categoryName"
+        >{{ category.categoryName }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="TipoPergunta" placeholder="Tipo de Pergunta">
+      <mat-option *ngFor="let type of questionTypes" [value]="type">{{
+        type
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Tipo: Verdadeiro/Falso -->
+  <div
+    *ngIf="questionForm.get('TipoPergunta')?.value === 'Verdadeiro/Falso'"
+    formGroupName="VerdadeiroFalso"
+  >
+    <mat-form-field>
+      <mat-select formControlName="Correta" placeholder="Resposta Correta">
+        <mat-option [value]="true">Verdadeiro</mat-option>
+        <mat-option [value]="false">Falso</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Tipo: Escolha Múltipla -->
+  <div
+    *ngIf="questionForm.get('TipoPergunta')?.value === 'Escolha Múltipla'"
+    formGroupName="EscolhaMultipla"
+  >
+    <div formArrayName="Opcoes">
+      <div
+        *ngFor="let opcao of opcoes.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="TextoOpcao"
+            placeholder="Texto da Opção"
+          />
+        </mat-form-field>
+        <mat-checkbox formControlName="Correta">Correta</mat-checkbox>
+        <button mat-icon-button color="warn" (click)="removeOpcao(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addOpcao()">
+      Adicionar Opção
+    </button>
+  </div>
+
+  <!-- Tipo: Ordem de Palavras -->
+  <div
+    *ngIf="questionForm.get('TipoPergunta')?.value === 'Ordem de Palavras'"
+    formGroupName="OrdemPalavras"
+  >
+    <div formArrayName="Palavras">
+      <div
+        *ngFor="let palavra of palavras.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <mat-form-field>
+          <input matInput formControlName="Palavra" placeholder="Palavra" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            formControlName="Posicao"
+            placeholder="Posição"
+          />
+        </mat-form-field>
+        <button mat-icon-button color="warn" (click)="removePalavra(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addPalavra()">
+      Adicionar Palavra
+    </button>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+  <button mat-raised-button color="warn" (click)="close()">Cancelar</button>
+</form>
+
+<!-- <h2>{{ data ? "Editar Pergunta" : "Adicionar Pergunta" }}</h2>
+<form [formGroup]="questionForm" (ngSubmit)="save()">
+  <mat-form-field>
+    <input matInput placeholder="Pergunta" formControlName="TextoPergunta" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Categoria" [(ngModel)]="question.category">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="questionForm.invalid"
+  >
+    Adicionar
+  </button>
+</form> -->

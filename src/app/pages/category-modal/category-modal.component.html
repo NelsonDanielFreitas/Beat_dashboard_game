@@ -1,0 +1,25 @@
+<h2>Adicionar Categoria</h2>
+
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Nome da categoria</mat-label>
+    <input
+      matInput
+      placeholder="Nome da Categoria"
+      formControlName="categoryName"
+      required
+    />
+    <mat-error *ngIf="categoryForm.get('categoryName')?.invalid">
+      O nome da categoria é obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="categoryForm.invalid"
+  >
+    Adicionar
+  </button>
+</form>

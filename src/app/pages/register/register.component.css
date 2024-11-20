@@ -1,0 +1,32 @@
+.register-container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+button:disabled {
+  background-color: #ddd;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
