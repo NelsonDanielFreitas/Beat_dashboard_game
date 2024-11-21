@@ -54,9 +54,6 @@ export class QuestionModalComponent implements OnInit {
   ) {
     this.question1 = new Question();
     //this.categories = this.dataService.categories;
-    if (data) {
-      this.question = { ...data.question };
-    }
 
     this.questionForm = this.fb.group({
       Id: [this.question1.id ? this.question1.id : -1],
@@ -96,6 +93,79 @@ export class QuestionModalComponent implements OnInit {
         Palavras: this.fb.array([]),
       }),
     });
+
+    if (data) {
+      console.log(data);
+      // this.question1 = { ...data.question };
+
+      // this.questionForm
+      //   .get('TextoPergunta')
+      //   .setValue(data.question.textoPergunta);
+
+      // this.questionForm.get('Id').setValue(data.question.id);
+      // this.questionForm.get('TempoLimite').setValue(data.question.tempoLimite);
+      // this.questionForm.get('Categoria').setValue(data.question.categoria);
+      // this.questionForm
+      //   .get('NivelDificuldade')
+      //   .setValue(data.question.nivelDificuldade);
+      // this.questionForm
+      //   .get('TipoPergunta')
+      //   .setValue(data.question.tipoPergunta);
+      this.fillForm(data.question);
+    }
+  }
+
+  private fillForm(question: any) {
+    this.questionForm.patchValue({
+      Id: question.id || null,
+      TextoPergunta: question.textoPergunta || '',
+      TempoLimite: question.tempoLimite || '',
+      Categoria: question.categoria || '',
+      NivelDificuldade: question.nivelDificuldade || 0,
+      DataCriacao: question.dataCriacao || new Date(),
+      DataUpdate: question.dataUpdate || new Date(),
+      TipoPergunta: question.tipoPergunta || '',
+    });
+
+    //"Verdadeiro/Falso"
+    if (question.verdadeiroFalsos?.length > 0) {
+      this.questionForm.patchValue({
+        VerdadeiroFalso: {
+          Correta: question.verdadeiroFalsos[0].correta || false, // Seleciona o primeiro item do array
+        },
+      });
+    }
+
+    // "Escolha Múltipla"
+    if (question.escolhaMultiplas) {
+      console.log('Sera?');
+      const opcoesFormArray = this.questionForm.get(
+        'EscolhaMultipla.Opcoes'
+      ) as FormArray;
+      question.escolhaMultiplas.forEach((opcao: any) => {
+        opcoesFormArray.push(
+          this.fb.group({
+            TextoOpcao: [opcao.textoOpcao || '', Validators.required],
+            Correta: [opcao.correta || false],
+          })
+        );
+      });
+    }
+
+    // "Ordem de Palavras"
+    if (question.ordemPalavras) {
+      const palavrasFormArray = this.questionForm.get(
+        'OrdemPalavras.Palavras'
+      ) as FormArray;
+      question.ordemPalavras.forEach((palavra: any) => {
+        palavrasFormArray.push(
+          this.fb.group({
+            Palavra: [palavra.palavra || '', Validators.required],
+            Posicao: [palavra.posicao || 0, Validators.required],
+          })
+        );
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -203,13 +273,4 @@ export class QuestionModalComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-
-  // save() {
-  //   if (this.data) {
-  //     this.dataService.updateQuestion(this.data.index, this.question);
-  //   } else {
-  //     this.dataService.addQuestion(this.question);
-  //   }
-  //   this.dialogRef.close();
-  // }
 }

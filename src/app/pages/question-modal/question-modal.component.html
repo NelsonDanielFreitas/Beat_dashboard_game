@@ -58,7 +58,7 @@
 
   <!-- Tipo: Escolha Múltipla -->
   <div
-    *ngIf="questionForm.get('TipoPergunta')?.value === 'Escolha Múltipla'"
+    *ngIf="questionForm.get('TipoPergunta')?.value == 'Escolha Múltipla'"
     formGroupName="EscolhaMultipla"
   >
     <div formArrayName="Opcoes">
