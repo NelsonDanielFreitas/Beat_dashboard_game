@@ -45,6 +45,7 @@ export class QuestionModalComponent implements OnInit {
   questionForm: FormGroup;
   question1: Question;
   questionTypes = ['Verdadeiro/Falso', 'Escolha Múltipla', 'Ordem de Palavras'];
+  update: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<QuestionModalComponent>,
@@ -96,6 +97,7 @@ export class QuestionModalComponent implements OnInit {
 
     if (data) {
       console.log(data);
+      this.update = true;
       // this.question1 = { ...data.question };
 
       // this.questionForm
@@ -257,6 +259,8 @@ export class QuestionModalComponent implements OnInit {
           ) || [],
       };
 
+      console.log(formattedData);
+
       this.dataService.saveQuestion(formattedData).subscribe({
         next: (response) => {
           console.log('Pergunta salva com sucesso', response);
@@ -267,6 +271,45 @@ export class QuestionModalComponent implements OnInit {
         },
       });
     }
+  }
+
+  updateFunc() {
+    console.log(this.questionForm.get('VerdadeiroFalso.Correta').value);
+    const formData = this.questionForm.value;
+
+    console.log(formData);
+    const formattedData = {
+      Id: formData.Id,
+      TextoPergunta: formData.TextoPergunta,
+      Categoria: formData.Categoria,
+      TempoLimite: formData.TempoLimite,
+      NivelDificuldade: formData.NivelDificuldade,
+      DataCriacao: formData.DataCriacao,
+      DataUpdate: formData.DataUpdate,
+      TipoPergunta: formData.TipoPergunta,
+      Correta: formData.VerdadeiroFalso?.Correta,
+      Opcoes:
+        formData.EscolhaMultipla?.Opcoes?.map((opcao: any) => ({
+          TextoOpcao: opcao.TextoOpcao,
+          Correta: opcao.Correta,
+        })) || [],
+      Palavras:
+        formData.OrdemPalavras?.Palavras?.map(
+          (palavra: any) => palavra.Palavra
+        ) || [],
+    };
+
+    this.dataService.updateQuestion(formattedData).subscribe({
+      next: (response) => {
+        console.log('Pergunta editada com sucesso', response);
+        this.dialogRef.close(true);
+      },
+      error: (err) => {
+        console.error('Erro ao dar update', err);
+      },
+    });
+
+    console.log(formattedData);
   }
 
   // Fechar o modal

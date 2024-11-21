@@ -87,6 +87,18 @@ export class HomeService {
     });
   }
 
+  updateQuestion(question: any): Observable<any> {
+    const accessToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${accessToken}`
+    );
+
+    return this.http.post<any>(`${this.apiUrl1}/UpdateQuestion`, question, {
+      headers,
+    });
+  }
+
   addQuestion(question: any) {
     this.questions.push(question);
   }
@@ -101,7 +113,7 @@ export class HomeService {
     return this.http.delete<any>(`${this.apiUrl1}/${id}`, { headers });
   }
 
-  updateQuestion(index: number, updatedQuestion: any) {
-    this.questions[index] = updatedQuestion;
-  }
+  // updateQuestion(index: number, updatedQuestion: any) {
+  //   this.questions[index] = updatedQuestion;
+  // }
 }
