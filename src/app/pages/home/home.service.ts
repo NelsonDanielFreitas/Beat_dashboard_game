@@ -65,6 +65,16 @@ export class HomeService {
       );
   }
 
+  getAllQuestion(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl1}/GetAllQuestion`, {}).pipe(
+      map((response) => {
+        if (response) {
+        }
+        return response;
+      })
+    );
+  }
+
   saveQuestion(question: any): Observable<any> {
     const accessToken = localStorage.getItem('authToken'); // Recuperando o token JWT
     const headers = new HttpHeaders().set(
@@ -81,8 +91,14 @@ export class HomeService {
     this.questions.push(question);
   }
 
-  deleteQuestion(index: number) {
-    this.questions.splice(index, 1);
+  deleteQuestion(id: number): Observable<any> {
+    const accessToken = localStorage.getItem('authToken'); // Recupera o token JWT
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${accessToken}`
+    );
+
+    return this.http.delete<any>(`${this.apiUrl1}/${id}`, { headers });
   }
 
   updateQuestion(index: number, updatedQuestion: any) {
