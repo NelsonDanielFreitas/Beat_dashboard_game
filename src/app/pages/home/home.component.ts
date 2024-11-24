@@ -53,14 +53,20 @@ export class HomeComponent implements OnInit {
   }
 
   openQuestionModal() {
-    this.dialog.open(QuestionModalComponent, {
+    const dialogRef = this.dialog.open(QuestionModalComponent, {
       panelClass: 'custom-modal', // Aplica a classe de estilo personalizada
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadAllQuestion();
     });
   }
 
-  editQuestion(index: number, question: any) {
+  async editQuestion(index: number, question: any) {
     const dialogRef = this.dialog.open(QuestionModalComponent, {
       data: { question, index },
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadAllQuestion();
     });
   }
 

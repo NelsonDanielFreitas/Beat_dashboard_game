@@ -98,21 +98,6 @@ export class QuestionModalComponent implements OnInit {
     if (data) {
       console.log(data);
       this.update = true;
-      // this.question1 = { ...data.question };
-
-      // this.questionForm
-      //   .get('TextoPergunta')
-      //   .setValue(data.question.textoPergunta);
-
-      // this.questionForm.get('Id').setValue(data.question.id);
-      // this.questionForm.get('TempoLimite').setValue(data.question.tempoLimite);
-      // this.questionForm.get('Categoria').setValue(data.question.categoria);
-      // this.questionForm
-      //   .get('NivelDificuldade')
-      //   .setValue(data.question.nivelDificuldade);
-      // this.questionForm
-      //   .get('TipoPergunta')
-      //   .setValue(data.question.tipoPergunta);
       this.fillForm(data.question);
     }
   }
@@ -168,18 +153,19 @@ export class QuestionModalComponent implements OnInit {
         );
       });
     }
+
+    //this.questionForm.('TipoPergunta').disabled;
   }
 
   ngOnInit(): void {
-    this.loadCategories(); // Carrega as categorias ao iniciar o componente
+    this.loadCategories();
   }
 
   loadCategories() {
     this.dataService.getAllCategories().subscribe({
       next: (response) => {
-        console.log(response.categories); // Confirma se `response.categories` é realmente um array
         if (response && Array.isArray(response.categories)) {
-          this.categories = response.categories; // Atribuindo o array diretamente
+          this.categories = response.categories;
         } else {
           console.error(
             'Categorias não encontradas ou não são um array',
@@ -277,7 +263,6 @@ export class QuestionModalComponent implements OnInit {
     console.log(this.questionForm.get('VerdadeiroFalso.Correta').value);
     const formData = this.questionForm.value;
 
-    console.log(formData);
     const formattedData = {
       Id: formData.Id,
       TextoPergunta: formData.TextoPergunta,
@@ -287,7 +272,7 @@ export class QuestionModalComponent implements OnInit {
       DataCriacao: formData.DataCriacao,
       DataUpdate: formData.DataUpdate,
       TipoPergunta: formData.TipoPergunta,
-      Correta: formData.VerdadeiroFalso?.Correta,
+      Correta: formData.VerdadeiroFalso?.Correta || false,
       Opcoes:
         formData.EscolhaMultipla?.Opcoes?.map((opcao: any) => ({
           TextoOpcao: opcao.TextoOpcao,
@@ -299,6 +284,8 @@ export class QuestionModalComponent implements OnInit {
         ) || [],
     };
 
+    console.log(formattedData);
+
     this.dataService.updateQuestion(formattedData).subscribe({
       next: (response) => {
         console.log('Pergunta editada com sucesso', response);
@@ -308,8 +295,6 @@ export class QuestionModalComponent implements OnInit {
         console.error('Erro ao dar update', err);
       },
     });
-
-    console.log(formattedData);
   }
 
   // Fechar o modal
