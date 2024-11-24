@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withInterceptorsFromDi,
@@ -13,6 +14,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldControl } from '@angular/material/form-field';
+import { AuthInterceptor } from './interceptor/AuthInterceptor.interceptor';
+import { TokenInterceptor } from './interceptor/TokenInterceptor.interceptor';
 
 @NgModule({
   imports: [
@@ -29,7 +32,11 @@ import { MatFormFieldControl } from '@angular/material/form-field';
     // RegisterComponent,
     // outros componentes
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
