@@ -1,0 +1,29 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  height: 96px;
+  width: 100%;
+  background: #FFFFFF;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+header div img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+}
+
+header div h2 {
+  margin: 0 32px;
+  color: #1A4157;
+}

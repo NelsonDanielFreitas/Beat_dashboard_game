@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { AuthInterceptor } from './interceptor/AuthInterceptor.interceptor';
 import { TokenInterceptor } from './interceptor/TokenInterceptor.interceptor';
+import { GlobalDecorComponent } from './global-decor/global-decor.component';
+import { GlobalHeaderComponent } from './global-header/global-header.component';
 
 @NgModule({
   imports: [
@@ -24,10 +26,11 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor.interceptor';
     ReactiveFormsModule, // A importação necessária para usar 'formGroup'
     MatOptionModule,
     MatSelectModule,
+    GlobalDecorComponent,
+    GlobalHeaderComponent,
   ],
   declarations: [
-    AppComponent,
-    //RegisterComponent,
+    AppComponent
 
     // RegisterComponent,
     // outros componentes
@@ -36,6 +39,10 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor.interceptor';
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
+  exports: [
+    GlobalDecorComponent,
+    GlobalHeaderComponent
   ],
   bootstrap: [AppComponent],
 })

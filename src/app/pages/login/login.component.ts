@@ -7,7 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {GlobalDecorComponent} from "../../global-decor/global-decor.component";
 
 @Component({
   selector: 'app-login',

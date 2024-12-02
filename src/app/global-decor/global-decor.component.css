@@ -1,0 +1,24 @@
+#decor1, #decor2, #decor3 {
+  position: fixed;
+}
+
+#decor1 {
+  top: 0;
+  right: -2vh;
+  width: 10vw;
+  height: 10vw;
+}
+
+#decor2 {
+  top: 60vh;
+  left: -10%;
+  width: 20vw;
+  height: 20vw;
+}
+
+#decor3 {
+  bottom: 0;
+  right: 0;
+  width: 20vw;
+  height: 20vw;
+}

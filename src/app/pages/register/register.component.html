@@ -1,56 +1,55 @@
-<div class="register-container">
-  <h2>Criar conta</h2>
+<div class="container">
+  <div class="register-container">
+    <h1>Criar conta</h1>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="username">Nome de utilizador</label>
-      <input id="username" formControlName="username" type="text" />
-      <div
-        *ngIf="
-          registerForm.get('username')?.invalid &&
-          registerForm.get('username')?.touched
-        "
-      >
-        <small class="error"
-          >O nome de utilizador é obrigatório e deve ter pelo menos 3
-          caracteres.</small
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input id="username" formControlName="username" type="text" placeholder="Nome de utilizador..."/>
+        <div
+          *ngIf="
+            registerForm.get('username')?.invalid &&
+            registerForm.get('username')?.touched
+          "
         >
+          <small class="error"
+            >O nome de utilizador é obrigatório e deve ter pelo menos 3
+            caracteres.</small
+          >
+        </div>
       </div>
-    </div>
 
-    <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" type="email" />
-      <div
-        *ngIf="
-          registerForm.get('email')?.invalid &&
-          registerForm.get('email')?.touched
-        "
-      >
-        <small class="error">Informe um email válido.</small>
-      </div>
-    </div>
-
-    <div>
-      <label for="password">Senha</label>
-      <input id="password" formControlName="password" type="password" />
-      <div
-        *ngIf="
-          registerForm.get('password')?.invalid &&
-          registerForm.get('password')?.touched
-        "
-      >
-        <small class="error"
-          >A senha é obrigatória e deve ter pelo menos 6 caracteres.</small
+      <div class="form-group">
+        <input id="email" formControlName="email" type="email" placeholder="Email..."/>
+        <div
+          *ngIf="
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+          "
         >
+          <small class="error">Informe um email válido.</small>
+        </div>
       </div>
-    </div>
 
-    <button type="submit" [disabled]="isSubmitting">Registar</button>
-    <button style="margin-top: 5px" (click)="Logout()">Logout</button>
+      <div class="form-group">
+        <input id="password" formControlName="password" type="password" placeholder="Senha..."/>
+        <div
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+          "
+        >
+          <small class="error"
+            >A senha é obrigatória e deve ter pelo menos 6 caracteres.</small
+          >
+        </div>
+      </div>
 
-    <div *ngIf="errorMessage" class="error-message">
-      <p>{{ errorMessage }}</p>
-    </div>
-  </form>
+      <button type="submit" [disabled]="isSubmitting">Registar</button>
+      <button (click)="Logout()">Logout</button>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </form>
+  </div>
 </div>
