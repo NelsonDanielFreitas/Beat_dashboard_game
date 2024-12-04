@@ -6,7 +6,6 @@
   padding: 32px 16px;
   border-radius: 10px;
   width: 500px;
-  max-height: 90vh;
 }
 
 .create-div input::placeholder {
@@ -18,18 +17,15 @@
   flex-direction: column;
   width: 100%;
   margin-top: 24px;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
 }
 
 mdc-text-field {
   padding: 0 !important;
 }
 
-.create-div button, .create-div form button {
+.create-div form button {
   width: calc(100% - 16px);
   height: 38px;
-  min-height: 38px;
   margin: 16px 8px 0 8px;
   text-align: center;
   box-sizing: border-box;
@@ -51,44 +47,8 @@ mdc-text-field {
   background: #8a8d98;
 }
 
-.create-div form .div-opcao {
-  display: flex;
-  flex-direction: column;
-}
-
-.create-div form .div-ordem {
-  display: flex;
-  gap: 16px;
-}
-
-.create-div form .div-ordem .remove-btn {
-  margin-top: 9px!important;
-}
-
-.create-div form .div-opcao .remove-btn,
-.create-div form .div-ordem .remove-btn{
-  margin: 0;
-  background: #9c0e0e;
-  width: min-content;
-}
-
-.create-div form .div-opcao .remove-btn:hover,
-.create-div form .div-ordem .remove-btn:hover  {
-  color: #FFFFFF;
-}
-
 @media (max-width: 800px) {
   .create-div {
     width: 306px;
-  }
-
-  .create-div form .div-ordem {
-    flex-wrap: wrap;
-    gap: 0;
-  }
-
-  .create-div form .div-ordem .remove-btn {
-    margin-top: 0 !important;
-    margin-bottom: 16px;
   }
 }

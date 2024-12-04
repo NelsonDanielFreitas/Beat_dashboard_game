@@ -27,6 +27,7 @@ import { Question } from '../../models/Question';
 export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['question', 'category', 'actions'];
   questions: Question[] = [];
+  //questions = [];
 
   constructor(private dialog: MatDialog, private dataService: HomeService) {
     this.questions = this.dataService.questions;

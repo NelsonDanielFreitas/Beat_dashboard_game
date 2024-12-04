@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     CommonModule,
   ],
+  styleUrl: './category-modal.component.css',
 })
 export class CategoryModalComponent {
   categoryForm: FormGroup;

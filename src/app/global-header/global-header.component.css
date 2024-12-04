@@ -7,6 +7,8 @@ header {
   height: 96px;
   width: 100%;
   background: #FFFFFF;
+  box-shadow: 0 4px 40px 0 #42474C26;
+  z-index: 1000;
 }
 
 header div {
