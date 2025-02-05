@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.dataService.getAllQuestion().subscribe({
       next: (response) => {
         this.questions = response.questions.result;
-        console.log(response.questions.result);
+        //console.log(response.questions.result);
       },
       error: (err) => {
         console.error('Erro ao carregar perguntas', err);

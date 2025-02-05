@@ -44,7 +44,7 @@ export class QuestionModalComponent implements OnInit {
   categories: Category[] = [];
   questionForm: FormGroup;
   question1: Question;
-  questionTypes = ['Verdadeiro/Falso', 'Escolha Múltipla', 'Ordem de Palavras'];
+  questionTypes = ['True/False', 'Multiple Choice', 'Word order'];
   update: boolean = false;
 
   constructor(

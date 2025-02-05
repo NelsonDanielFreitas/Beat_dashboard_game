@@ -1,10 +1,15 @@
 <div class="container">
   <div class="register-container">
-    <h1>Criar conta</h1>
+    <h1>Create account</h1>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <input id="username" formControlName="username" type="text" placeholder="Nome de utilizador..."/>
+        <input
+          id="username"
+          formControlName="username"
+          type="text"
+          placeholder="Username..."
+        />
         <div
           *ngIf="
             registerForm.get('username')?.invalid &&
@@ -12,26 +17,36 @@
           "
         >
           <small class="error"
-            >O nome de utilizador é obrigatório e deve ter pelo menos 3
-            caracteres.</small
+            >The username is compulsory and must be at least 3
+            characters.</small
           >
         </div>
       </div>
 
       <div class="form-group">
-        <input id="email" formControlName="email" type="email" placeholder="Email..."/>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          placeholder="Email..."
+        />
         <div
           *ngIf="
             registerForm.get('email')?.invalid &&
             registerForm.get('email')?.touched
           "
         >
-          <small class="error">Informe um email válido.</small>
+          <small class="error">Enter a valid email address.</small>
         </div>
       </div>
 
       <div class="form-group">
-        <input id="password" formControlName="password" type="password" placeholder="Senha..."/>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          placeholder="Password..."
+        />
         <div
           *ngIf="
             registerForm.get('password')?.invalid &&
@@ -39,12 +54,13 @@
           "
         >
           <small class="error"
-            >A senha é obrigatória e deve ter pelo menos 6 caracteres.</small
+            >The password is mandatory and must be at least 6 characters
+            long....</small
           >
         </div>
       </div>
 
-      <button type="submit" [disabled]="isSubmitting">Registar</button>
+      <button type="submit" [disabled]="isSubmitting">Register</button>
       <button (click)="Logout()">Logout</button>
 
       <div *ngIf="errorMessage" class="error-message">

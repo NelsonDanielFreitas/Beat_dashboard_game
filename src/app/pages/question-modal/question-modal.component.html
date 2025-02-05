@@ -1,13 +1,13 @@
 <div class="create-div">
-  <h2>Gerir Pergunta</h2>
+  <h2>Manage Question</h2>
 
   <form [formGroup]="questionForm">
     <mat-form-field appearance="outline">
-<!--      <mat-label>Texto da Pergunta</mat-label>-->
+      <!--      <mat-label>Texto da Pergunta</mat-label>-->
       <input
         matInput
         formControlName="TextoPergunta"
-        placeholder="Texto da Pergunta..."
+        placeholder="Question text..."
       />
     </mat-form-field>
 
@@ -15,21 +15,22 @@
       <input
         matInput
         formControlName="TempoLimite"
-        placeholder="Tempo Limite (segundos)"
+        placeholder="Time Limit (seconds)"
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <input
         matInput
-        min="1" max="3"
+        min="1"
+        max="3"
         type="number"
         formControlName="NivelDificuldade"
-        placeholder="Nivel de Dificuldade"
+        placeholder="Level of Difficulty"
       />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-select formControlName="Categoria" placeholder="Categoria">
+      <mat-select formControlName="Categoria" placeholder="Category">
         <mat-option
           *ngFor="let category of categories"
           [value]="category.categoryName"
@@ -39,7 +40,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-select formControlName="TipoPergunta" placeholder="Tipo de Pergunta">
+      <mat-select formControlName="TipoPergunta" placeholder="Type of Question">
         <mat-option *ngFor="let type of questionTypes" [value]="type">{{
           type
         }}</mat-option>
@@ -48,86 +49,75 @@
 
     <!-- Tipo: Verdadeiro/Falso -->
     <div
-      *ngIf="questionForm.get('TipoPergunta')?.value === 'Verdadeiro/Falso'"
+      *ngIf="questionForm.get('TipoPergunta')?.value === 'True/False'"
       formGroupName="VerdadeiroFalso"
     >
       <mat-form-field>
-        <mat-select formControlName="Correta" placeholder="Resposta Correta">
-          <mat-option [value]="true">Verdadeiro</mat-option>
-          <mat-option [value]="false">Falso</mat-option>
+        <mat-select formControlName="Correta" placeholder="Correct Answer">
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
     <!-- Tipo: Escolha Múltipla -->
     <div
-      *ngIf="questionForm.get('TipoPergunta')?.value == 'Escolha Múltipla'"
+      *ngIf="questionForm.get('TipoPergunta')?.value == 'Multiple Choice'"
       formGroupName="EscolhaMultipla"
     >
       <div formArrayName="Opcoes">
-        <div class="div-opcao"
+        <div
+          class="div-opcao"
           *ngFor="let opcao of opcoes.controls; let i = index"
           [formGroupName]="i"
         >
-          <mat-form-field style="margin-top: 16px;">
+          <mat-form-field style="margin-top: 16px">
             <input
               matInput
               formControlName="TextoOpcao"
-              placeholder="Texto da Opção"
+              placeholder="Option text"
             />
           </mat-form-field>
-          <div style="display: flex; gap: 16px;">
-            <mat-checkbox formControlName="Correta">Correta</mat-checkbox>
-            <button class="remove-btn" (click)="removeOpcao(i)">
-              Remover
-            </button>
+          <div style="display: flex; gap: 16px">
+            <mat-checkbox formControlName="Correta">Correct</mat-checkbox>
+            <button class="remove-btn" (click)="removeOpcao(i)">Remove</button>
           </div>
         </div>
       </div>
-      <button mat-raised-button (click)="addOpcao()">
-        Adicionar Opção
-      </button>
+      <button mat-raised-button (click)="addOpcao()">Add Option</button>
     </div>
 
     <!-- Tipo: Ordem de Palavras -->
     <div
-      *ngIf="questionForm.get('TipoPergunta')?.value === 'Ordem de Palavras'"
+      *ngIf="questionForm.get('TipoPergunta')?.value === 'Word order'"
       formGroupName="OrdemPalavras"
     >
       <div formArrayName="Palavras">
-        <div class="div-ordem"
+        <div
+          class="div-ordem"
           *ngFor="let palavra of palavras.controls; let i = index"
           [formGroupName]="i"
         >
           <mat-form-field>
-            <input matInput formControlName="Palavra" placeholder="Palavra" />
+            <input matInput formControlName="Palavra" placeholder="Word" />
           </mat-form-field>
           <mat-form-field>
             <input
               matInput
               type="number"
               formControlName="Posicao"
-              placeholder="Posição"
+              placeholder="Position"
             />
           </mat-form-field>
-          <button class="remove-btn" (click)="removePalavra(i)">
-            Remover
-          </button>
+          <button class="remove-btn" (click)="removePalavra(i)">Remove</button>
         </div>
       </div>
       <button mat-raised-button color="primary" (click)="addPalavra()">
-        Adicionar Palavra
+        Add a word
       </button>
     </div>
   </form>
-    <button
-      *ngIf="update === false"
-      (click)="save()"
-    >
-      Guardar
-    </button>
-    <button *ngIf="update === true" (click)="updateFunc()">
-      Atualizar
-    </button>
-    <button (click)="close()">Cancelar</button>
+  <button *ngIf="update === false" (click)="save()">Save</button>
+  <button *ngIf="update === true" (click)="updateFunc()">Update</button>
+  <button (click)="close()">Cancel</button>
 </div>

@@ -1,29 +1,35 @@
 <!-- src/app/app.component.html -->
 <div class="container">
   <div class="add-section">
-    <button class="add-btn" mat-button (click)="openCategoryModal()">Adicionar Categoria</button>
-    <button class="add-btn" mat-button (click)="openQuestionModal()">Adicionar Pergunta</button>
+    <button class="add-btn" mat-button (click)="openCategoryModal()">
+      Add Category
+    </button>
+    <button class="add-btn" mat-button (click)="openQuestionModal()">
+      Add question
+    </button>
   </div>
 
-  <h2>Perguntas Criadas</h2>
+  <h2>Created Questions</h2>
   <div class="questions-list">
     <table mat-table [dataSource]="questions" class="mat-elevation-z8">
       <ng-container matColumnDef="question">
-        <th mat-header-cell *matHeaderCellDef>Pergunta</th>
-        <td mat-cell *matCellDef="let question">{{ question.textoPergunta }}</td>
+        <th mat-header-cell *matHeaderCellDef>Question</th>
+        <td mat-cell *matCellDef="let question">
+          {{ question.textoPergunta }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="category">
         <td mat-cell *matCellDef="let question">{{ question.categoria }}</td>
-        <th mat-header-cell *matHeaderCellDef>Categoria</th>
+        <th mat-header-cell *matHeaderCellDef>Category</th>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td id="actions" mat-cell *matCellDef="let question; let i = index">
-          <button mat-button (click)="editQuestion(i, question)">Editar</button>
+          <button mat-button (click)="editQuestion(i, question)">Edit</button>
           <button mat-button (click)="deleteQuestion(question.id)">
-            Excluir
+            Delete
           </button>
         </td>
       </ng-container>

@@ -47,7 +47,7 @@ export class HomeService {
       'Authorization',
       `Bearer ${accessToken}`
     );
-    console.log(accessToken);
+    //console.log(accessToken);
     return this.http
       .post<any>(
         `${this.apiUrl}/GetAllCategories`,
