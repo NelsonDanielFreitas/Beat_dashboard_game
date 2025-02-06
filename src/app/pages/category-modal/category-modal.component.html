@@ -1,26 +1,22 @@
 <div class="create-div">
-  <h2>Adicionar Categoria</h2>
+  <h2>Add Category</h2>
 
   <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
-<!--      <mat-label>Nome da categoria</mat-label>-->
+      <!--      <mat-label>Nome da categoria</mat-label>-->
       <input
         matInput
-        placeholder="Nome da categoria..."
+        placeholder="Category name..."
         formControlName="categoryName"
         required
       />
       <mat-error *ngIf="categoryForm.get('categoryName')?.invalid">
-        O nome da categoria é obrigatório.
+        The name of the category is mandatory.
       </mat-error>
     </mat-form-field>
 
-    <button
-      mat-button
-      type="submit"
-      [disabled]="categoryForm.invalid"
-    >
-      Adicionar
+    <button mat-button type="submit" [disabled]="categoryForm.invalid">
+      Add
     </button>
   </form>
 </div>
