@@ -2,8 +2,8 @@
   <h2>Manage Question</h2>
 
   <form [formGroup]="questionForm">
-    <mat-form-field appearance="outline">
-      <!--      <mat-label>Texto da Pergunta</mat-label>-->
+    <mat-form-field appearance="outline" style="margin-top: 6px">
+      <mat-label>Question text</mat-label>
       <input
         matInput
         formControlName="TextoPergunta"
@@ -12,6 +12,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Time limit</mat-label>
       <input
         matInput
         formControlName="TempoLimite"
@@ -19,6 +20,7 @@
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
+      <mat-label>Level of Difficulty</mat-label>
       <input
         matInput
         min="1"
@@ -30,6 +32,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
       <mat-select formControlName="Categoria" placeholder="Category">
         <mat-option
           *ngFor="let category of categories"
@@ -40,6 +43,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Type of Question</mat-label>
       <mat-select formControlName="TipoPergunta" placeholder="Type of Question">
         <mat-option *ngFor="let type of questionTypes" [value]="type">{{
           type
