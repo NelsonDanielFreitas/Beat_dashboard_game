@@ -86,6 +86,7 @@ export class QuestionModalComponent implements OnInit {
       ],
       VerdadeiroFalso: this.fb.group({
         Correta: [''],
+        Curiosidade: ['', [Validators.maxLength(500)]],
       }),
       EscolhaMultipla: this.fb.group({
         Opcoes: this.fb.array([]),
@@ -118,7 +119,8 @@ export class QuestionModalComponent implements OnInit {
     if (question.verdadeiroFalsos?.length > 0) {
       this.questionForm.patchValue({
         VerdadeiroFalso: {
-          Correta: question.verdadeiroFalsos[0].correta || false, // Seleciona o primeiro item do array
+          Correta: question.verdadeiroFalsos[0].correta || false,
+          Curiosidade: question.verdadeiroFalsos[0].curiosidade || '',
         },
       });
     }
@@ -234,6 +236,7 @@ export class QuestionModalComponent implements OnInit {
         DataUpdate: formData.DataUpdate,
         TipoPergunta: formData.TipoPergunta,
         Correta: formData.VerdadeiroFalso?.Correta || null,
+        Curiosidade: formData.VerdadeiroFalso?.Curiosidade || '',
         Opcoes:
           formData.EscolhaMultipla?.Opcoes?.map((opcao: any) => ({
             TextoOpcao: opcao.TextoOpcao,
@@ -273,6 +276,7 @@ export class QuestionModalComponent implements OnInit {
       DataUpdate: formData.DataUpdate,
       TipoPergunta: formData.TipoPergunta,
       Correta: formData.VerdadeiroFalso?.Correta || false,
+      Curiosidade: formData.VerdadeiroFalso?.Curiosidade || '',
       Opcoes:
         formData.EscolhaMultipla?.Opcoes?.map((opcao: any) => ({
           TextoOpcao: opcao.TextoOpcao,
